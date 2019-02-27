@@ -30,15 +30,15 @@ function showHelp() {
 
 function showSuccess() {
     echo
-	echo "Tag v$major.$minor.$patch was created in local repository."
+	echo "Tag $major.$minor.$patch was created in local repository."
 	echo
 	echo "Push it:"
 	echo
-	echo "    git push origin v$major.$minor.$patch"
+	echo "    git push origin $major.$minor.$patch"
 	echo
 	echo "Delete tag:"
 	echo
-	echo "    git tag -d v$major.$minor.$patch"
+	echo "    git tag -d $major.$minor.$patch"
 	echo
 }
 
