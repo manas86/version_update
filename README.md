@@ -64,7 +64,7 @@ Executing git push origin 1.0.0 ...
 Counting objects: 1, done.
 Writing objects: 100% (1/1), 179 bytes | 179.00 KiB/s, done.
 Total 1 (delta 0), reused 0 (delta 0)
-To https://github.com/manas86/version_update.git
+To https://github.com/manasxx/version_update.git
  * [new tag]         1.0.0 -> 1.0.0
 ```
 
@@ -98,4 +98,10 @@ Major version
 
 ```bash
 ./version_update.sh major ' module Change'
+```
+
+Run the Docker Image 
+
+``` 
+docker run -e GIT_USERNAME=<insert> -e GIT_PASSWORD=<INSERT> version-update:latest
 ```
