@@ -99,3 +99,9 @@ Major version
 ```bash
 ./version_update.sh major ' module Change'
 ```
+
+Run the Docker Image 
+
+``` 
+docker run -e GIT_USERNAME=<insert> -e GIT_PASSWORD=<INSERT> version-update:latest
+```

@@ -1,0 +1,33 @@
+stages:
+  - build
+  - tag-latest
+
+variables:
+  IMAGE: ${ARTIFACTORY_URL}/${ARTIFACTORY_DOCKER_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_BUILD_REF_NAME}
+  LATEST_IMAGE: ${ARTIFACTORY_URL}/${ARTIFACTORY_DOCKER_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:latest
+
+.docker_job: &docker_job
+  image: docker:18.06.0-ce
+  before_script:
+    - echo "IMAGE ${IMAGE}"
+    - docker login --username ${ARTIFACTORY_USER} --password ${ARTIFACTORY_PASSWD} ${ARTIFACTORY_URL}
+  tags:
+    - docker-tag
+
+build:
+  stage: build
+  <<: *docker_job
+  script:
+    - docker build -t $IMAGE -f ./Dockerfile .
+    - docker push $IMAGE
+
+tag-latest:
+  stage: tag-latest
+  <<: *docker_job
+  script:
+    - docker pull $IMAGE
+    - docker tag $IMAGE $LATEST_IMAGE
+    - docker push $LATEST_IMAGE
+  only:
+    refs:
+      - master
